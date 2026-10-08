@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Πρόγραμμα Ανάπτυξης U11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;800&family=Fira+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrap">
+<header class="top">
+  <div class="teams" role="group" aria-label="Τμήμα">
+    <button id="tm-A" data-team="A" aria-pressed="true">U11 · Ακαδημία Α΄</button>
+    <button id="tm-G" data-team="G" aria-pressed="false">U9 · Ακαδημία Γ΄</button>
+  </div>
+  <span class="eyebrow" id="hEyebrow"></span>
+  <h1 id="hTitle"></h1>
+  <p class="sub" id="hSub"></p>
+  <div class="meta" id="hMeta"></div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Ενότητες">
+  <button role="tab" id="t-season" aria-controls="season" aria-selected="true">Σεζόν</button>
+  <button role="tab" id="t-drills" aria-controls="drills" aria-selected="false">Ασκησιολόγιο</button>
+  <button role="tab" id="t-method" aria-controls="method" aria-selected="false">Μέθοδος</button>
+  <button role="tab" id="t-numbers" aria-controls="numbers" aria-selected="false">Πρόοδος</button>
+</nav>
+
+<!-- SEASON -->
+<section class="tab" id="season" role="tabpanel" aria-labelledby="t-season">
+  <div style="display:grid;gap:10px">
+    <h2 id="seasonH"></h2>
+    <p class="muted" style="margin:0;max-width:65ch">Κάθε μπλοκ έχει ένα κύριο θέμα που οδηγεί και ένα δευτερεύον που συνοδεύει. <span id="seasonTestNote"></span></p>
+  </div>
+  <div class="timeline" aria-label="Χρονοδιάγραμμα σεζόν">
+    <div class="tl-top" id="tlTop"></div>
+    <div class="tl" id="tl"></div>
+    <div class="tl-labels" id="tlLabels"></div>
+  </div>
+  <div class="blocks" id="blocks"></div>
+</section>
+
+<!-- DRILLS -->
+<section class="tab" id="drills" role="tabpanel" aria-labelledby="t-drills" hidden>
+  <div style="display:grid;gap:10px">
+    <h2>Ασκησιολόγιο</h2>
+    <p class="muted" style="margin:0;max-width:65ch">Κάθε άσκηση έχει μόνιμο κωδικό: κατηγορία και αριθμός που δεν ξαναδίνεται. Η κατηγορία δείχνει τι οδηγεί, οι υπόλοιπες τι συνοδεύει. Οι ασκήσεις με σχέδιο γηπέδου σημειώνονται με ◆.</p>
+  </div>
+  <div class="drills-layout">
+    <div>
+      <div class="chips" id="chips" role="group" aria-label="Φίλτρο κατηγορίας"></div>
+      <div class="list" id="list"></div>
+    </div>
+    <article class="detail" id="detail" aria-live="polite"></article>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="tab" id="method" role="tabpanel" aria-labelledby="t-method" hidden>
+  <div style="display:grid;gap:12px">
+    <h2>Αρχές που δεν αλλάζουν όλη τη χρονιά</h2>
+    <ol class="principles" id="mPrinciples"></ol>
+  </div>
+  <div style="display:grid;gap:12px">
+    <h2>Η προπόνηση των 60 λεπτών</h2>
+    <div class="tablewrap" style="border:0;background:none" id="mBar"></div>
+    <p class="muted" style="margin:0;max-width:65ch;font-size:14px" id="mBarNote"></p>
+    <div class="tablewrap"><table><thead><tr><th>Μέρα</th><th>Ρόλος</th><th>Τι γίνεται</th></tr></thead><tbody id="mWeek"></tbody></table></div>
+  </div>
+  <div style="display:grid;gap:12px">
+    <h2 id="mTestsH"></h2>
+    <p class="muted" style="margin:0;max-width:65ch" id="mTestsNote"></p>
+    <div class="tablewrap"><table><thead><tr><th>#</th><th id="mTestsCol">Τεστ</th><th>Τι δείχνει / μέτρηση</th></tr></thead><tbody id="mTests"></tbody></table></div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="tab" id="numbers" role="tabpanel" aria-labelledby="t-numbers" hidden>
+  <div style="display:grid;gap:10px">
+    <h2>Πρόοδος της ομάδας</h2>
+    <p class="muted" style="margin:0;max-width:65ch">Μόνο συνολικά νούμερα. Τα στοιχεία κάθε παιδιού τα βλέπουν μόνο ο προπονητής και οι γονείς του.</p>
+  </div>
+  <div class="stats" id="stats"></div>
+  <p class="muted" style="margin:0;font-size:13px;max-width:70ch" id="statsNote"></p>
+  <div class="attgrid">
+    <div class="callout"><h3>Μέση παρουσία ανά προπόνηση</h3><div class="cov" id="monthBars"></div></div>
+    <div class="callout"><h3>Παιδιά ανά ποσοστό παρουσίας</h3><div class="bandbar" id="bandBar" role="img"></div><div class="legend" id="bandLegend"></div></div>
+  </div>
+
+  <div style="display:grid;gap:12px">
+    <h3>Κάλυψη ασκησιολογίου ανά κατηγορία</h3>
+    <p class="muted" style="margin:0;max-width:65ch;font-size:14px" id="covNote"></p>
+    <div class="cov" id="cov"></div>
+  </div>
+
+  <div style="display:grid;gap:12px">
+    <h3>Τελευταίες προπονήσεις</h3>
+    <div class="log" id="log"></div>
+  </div>
+
+  <div style="display:grid;gap:12px">
+    <h3>Φιλικά</h3>
+    <div class="log" id="friendlies"></div>
+  </div>
+
+  <div style="display:grid;gap:12px">
+    <h3 id="nTestsH">Τεστ αναφοράς</h3>
+    <div class="pending" id="nPending"></div>
+  </div>
+</section>
+
+<footer id="footer">Τα δεδομένα προέρχονται από το ημερολόγιο προπονήσεων και το ασκησιολόγιο του προπονητή.<br><span id="source"></span></footer>
+</div>
+<script src="config.js"></script>
+<script src="js/content.js"></script>
+<script src="js/diagrams.js"></script>
+<script src="js/drills.js"></script>
+<script src="js/app.js"></script>
+<script src="js/live.js"></script>
+</body>
+</html>
