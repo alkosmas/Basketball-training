@@ -1,3 +1,4 @@
+/** @OnlyCurrentDoc */
 /**
  * U11 / U9 — Read-only API πάνω από το Google Sheet.
  *
